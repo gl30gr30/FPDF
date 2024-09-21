@@ -1,0 +1,51 @@
+from fpdf import FPDF
+
+# PDF'e renkler ve sayılar listesi ekleniyor
+colors = [
+    ("Κόκκινο (Kokkino)", "Red"), ("Μπλε (Ble)", "Blue"), ("Πράσινο (Prasino)", "Green"),
+    ("Κίτρινο (Kitrino)", "Yellow"), ("Πορτοκαλί (Portokali)", "Orange"), ("Μαύρο (Mavro)", "Black"),
+    ("Άσπρο (Aspro)", "White"), ("Γκρι (Gri)", "Gray"), ("Ροζ (Roz)", "Pink"),
+    ("Μωβ (Mov)", "Purple"), ("Καφέ (Kafe)", "Brown"), ("Χρυσό (Hriso)", "Gold"),
+    ("Ασημί (Asimi)", "Silver"), ("Μπεζ (Bej)", "Beige"), ("Τυρκουάζ (Tyrkouaz)", "Turquoise"),
+    ("Λιλά (Lila)", "Lilac"), ("Σκούρο μπλε (Skouro ble)", "Dark blue"), ("Ανοιχτό πράσινο (Anihto prasino)", "Light green"),
+    ("Βιολετί (Violeti)", "Violet")
+]
+
+numbers = [
+    ("Ένα (Ena)", "One"), ("Δύο (Dio)", "Two"), ("Τρία (Tria)", "Three"),
+    ("Τέσσερα (Tessera)", "Four"), ("Πέντε (Pente)", "Five"), ("Έξι (Exi)", "Six"),
+    ("Επτά (Epta)", "Seven"), ("Οκτώ (Okto)", "Eight"), ("Εννέα (Ennea)", "Nine"),
+    ("Δέκα (Deka)", "Ten"), ("Έντεκα (Endeka)", "Eleven"), ("Δώδεκα (Dodeka)", "Twelve"),
+    ("Δεκατρία (Dekatria)", "Thirteen"), ("Δεκατέσσερα (Dekatessera)", "Fourteen"), ("Δεκαπέντε (Dekapente)", "Fifteen"),
+    ("Δεκαέξι (Dekaexi)", "Sixteen"), ("Δεκαεπτά (Dekaefta)", "Seventeen"), ("Δεκαοκτώ (Dekaokto)", "Eighteen"),
+    ("Δεκαεννέα (Dekaennea)", "Nineteen"), ("Είκοσι (Ikosi)", "Twenty"), ("Τριάντα (Trianda)", "Thirty"),
+    ("Σαράντα (Saranda)", "Forty"), ("Πενήντα (Peninda)", "Fifty"), ("Εξήντα (Exinta)", "Sixty"),
+    ("Εβδομήντα (Evdominda)", "Seventy"), ("Ογδόντα (Ogdoanta)", "Eighty"), ("Ενενήντα (Eneninda)", "Ninety"),
+    ("Εκατό (Ekato)", "One hundred")
+]
+
+# PDF oluşturma
+pdf = FPDF()
+pdf.set_auto_page_break(auto=True, margin=15)
+pdf.add_page()
+pdf.add_font('DejaVu', '', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf', uni=True)
+pdf.set_font("DejaVu", size=12)
+
+# Başlık ekleme
+pdf.cell(200, 10, txt="Yunanca - İngilizce Renkler ve Sayılar", ln=True, align="C")
+
+# Renkler listesi ekleme
+pdf.cell(200, 10, txt="Renkler:", ln=True, align="L")
+for greek, english in colors:
+    pdf.cell(0, 10, f"{greek} - {english}", ln=True)
+
+# Sayılar listesi ekleme
+pdf.cell(200, 10, txt="Sayılar:", ln=True, align="L")
+for greek, english in numbers:
+    pdf.cell(0, 10, f"{greek} - {english}", ln=True)
+
+# PDF'i kaydetme
+pdf_filename = "Yunanca_Renkler_ve_Sayilar.pdf"
+pdf.output(pdf_filename)
+
+print(f"PDF '{pdf_filename}' başarıyla oluşturuldu.")
